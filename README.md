@@ -1,36 +1,21 @@
-# Movie Ticket Booking System - MERN Stack
+# Movie Ticket Booking System - React Frontend
 
-A modern, responsive movie ticket booking application built using the MERN stack (MongoDB, Express, React, Node.js). 
+A modern, responsive movie ticket booking application built using React (Vite). This is a purely static frontend implementation utilizing local mock data to simulate application behavior.
 
 ## Core Features
-* **Movie Listings**: Browse currently showing movies with rich UI
+* **Movie Listings**: Browse currently showing movies with a glassmorphism UI
 * **Seat Selection**: Interactive theatre layout to select specific seats
 * **Checkout & Payment**: Order summary and mock payment integration
 * **Booking Confirmation**: E-Ticket generation with success response
 
 ## Technology Stack
-* **Frontend**: React (Vite), React Router v6, Axios, Lucide React (Icons), Custom CSS (Glassmorphism)
-* **Backend**: Node.js, Express.js
-* **Database**: MongoDB (Mongoose ORM)
+* **Frontend**: React (Vite), React Router v6, Lucide React (Icons), Custom CSS
 
 ---
 
 ## Local Setup Instructions
 
-### 1. Backend Setup
-1. Open a terminal and navigate to the `backend` folder:
-   ```bash
-   cd backend
-   ```
-2. Make sure you have MongoDB running locally, or update the `MONGO_URI` in `server.js` to an Atlas URL.
-3. Start the node server:
-   ```bash
-   node server.js
-   ```
-   *(The server runs on http://localhost:5000 and auto-seeds initial movie data.)*
-
-### 2. Frontend Setup
-1. Open another terminal and navigate to the `frontend` folder:
+1. Open a terminal and navigate to the `frontend` folder:
    ```bash
    cd frontend
    ```
@@ -49,7 +34,7 @@ A modern, responsive movie ticket booking application built using the MERN stack
    ```bash
    git init
    git add .
-   git commit -m "Initial commit of MERN Movie Booking app"
+   git commit -m "Initial commit of Movie Booking Site"
    ```
 2. Create a new repository on your [GitHub Account](https://github.com/new).
 3. Connect and push your code:
@@ -59,13 +44,5 @@ A modern, responsive movie ticket booking application built using the MERN stack
    git push -u origin main
    ```
 
-### Deployment Strategy
-1. **Frontend (Vercel) / (Netlify)**
-   * Deploy the `/frontend` sub-directory directly via Vercel dashboard.
-   * Make sure to update `API_URL` in your frontend components (`http://localhost:5000` -> `https://your-backend-url.onrender.com`).
-   * Setup rewriting or CORS in backend to accept your Vercel domain.
-
-2. **Backend (Render) / (Railway)**
-   * Deploy the `/backend` directory on Render as a Web Service.
-   * Set the root directory to `backend`.
-   * Provide the `MONGO_URI` environment variable if using MongoDB Atlas.
+### Deployment Strategy (Vercel or Netlify)
+You can deploy the `/frontend` sub-directory directly via the Vercel or Netlify dashboard. Since this is a completely static application with no backend dependencies, it will deploy flawlessly on any static web hosting provider. Make sure to specify `frontend` as your root directory during deployment configuration.
