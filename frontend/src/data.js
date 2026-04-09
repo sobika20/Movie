@@ -1,9 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const Movie = require('../models/Movie');
-
-const mockMovies = [
+export const mockMovies = [
   {
+    _id: "1",
     title: "Avengers: Endgame",
     genre: "Action, Sci-Fi",
     duration: 181,
@@ -17,6 +14,7 @@ const mockMovies = [
     ]
   },
   {
+    _id: "2",
     title: "The Dark Knight",
     genre: "Action, Crime",
     duration: 152,
@@ -30,6 +28,7 @@ const mockMovies = [
     ]
   },
   {
+    _id: "3",
     title: "Inception",
     genre: "Action, Sci-Fi, Thriller",
     duration: 148,
@@ -43,30 +42,4 @@ const mockMovies = [
   }
 ];
 
-// GET all movies
-router.get('/', async (req, res) => {
-  try {
-    let movies = await Movie.find();
-    if (movies.length === 0) {
-      // Seed database if empty
-      await Movie.insertMany(mockMovies);
-      movies = await Movie.find();
-    }
-    res.json(movies);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-// GET movie by ID
-router.get('/:id', async (req, res) => {
-  try {
-    const movie = await Movie.findById(req.params.id);
-    if (!movie) return res.status(404).json({ message: 'Movie not found' });
-    res.json(movie);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
-  }
-});
-
-module.exports = router;
+export const mockBookings = {};

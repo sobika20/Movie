@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { Clock, Calendar } from 'lucide-react';
-
-const API_URL = 'http://localhost:5000';
+import { mockMovies } from '../data';
 
 const MoviesList = () => {
   const [movies, setMovies] = useState([]);
@@ -11,18 +9,12 @@ const MoviesList = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/movies`);
-        setMovies(response.data);
-      } catch (error) {
-        console.error('Error fetching movies:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMovies();
+    // Simulate slight network delay
+    const timer = setTimeout(() => {
+      setMovies(mockMovies);
+      setLoading(false);
+    }, 500);
+    return () => clearTimeout(timer);
   }, []);
 
   if (loading) return <div style={{ textAlign: 'center', marginTop: '2rem' }}>Loading movies...</div>;

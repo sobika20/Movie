@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { mockMovies } from '../data';
 
-const API_URL = 'http://localhost:5000';
 const ROWS = ['A', 'B', 'C', 'D', 'E', 'F'];
 const SEATS_PER_ROW = 10;
 const TICKET_PRICE = 15;
@@ -15,15 +14,11 @@ const SeatSelection = () => {
   const [selectedSeats, setSelectedSeats] = useState([]);
   
   useEffect(() => {
-    const fetchMovie = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/movies/${movieId}`);
-        setMovie(response.data);
-        if (response.data.shows && response.data.shows.length > 0) {
-          setSelectedShow(response.data.shows[0]);
-        }
-      } catch (error) {
-        console.error('Error fetching movie:', error);
+    const fetchMovie = () => {
+      const foundMovie = mockMovies.find(m => m._id.toString() === movieId) || mockMovies[0];
+      setMovie(foundMovie);
+      if (foundMovie && foundMovie.shows && foundMovie.shows.length > 0) {
+        setSelectedShow(foundMovie.shows[0]);
       }
     };
     fetchMovie();

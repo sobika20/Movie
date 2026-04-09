@@ -1,21 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import axios from 'axios';
 import { CheckCircle } from 'lucide-react';
-
-const API_URL = 'http://localhost:5000';
+import { mockBookings } from '../data';
 
 const BookingConfirmation = () => {
   const { bookingId } = useParams();
   const [booking, setBooking] = useState(null);
   
   useEffect(() => {
-    const fetchBooking = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/bookings/${bookingId}`);
-        setBooking(response.data);
-      } catch (error) {
-        console.error('Error fetching booking:', error);
+    const fetchBooking = () => {
+      const foundBooking = mockBookings[bookingId];
+      if (foundBooking) {
+        setBooking(foundBooking);
+      } else {
+        console.error("Booking not found");
       }
     };
     fetchBooking();

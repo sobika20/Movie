@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import { CreditCard } from 'lucide-react';
-
-const API_URL = 'http://localhost:5000';
+import { mockBookings } from '../data';
 
 const Checkout = () => {
   const location = useLocation();
@@ -19,23 +17,18 @@ const Checkout = () => {
     e.preventDefault();
     setIsProcessing(true);
     
-    try {
-      // Create booking in backend
-      const response = await axios.post(`${API_URL}/bookings`, {
+    // Simulate payment delay and backend processing
+    setTimeout(() => {
+      const newMockId = 'mock_' + Math.random().toString(36).substr(2, 9);
+      mockBookings[newMockId] = {
         ...bookingDetails,
-        paymentStatus: 'Completed'
-      });
+        _id: newMockId,
+        paymentStatus: 'Completed',
+        createdAt: new Date()
+      };
       
-      // Simulate payment delay
-      setTimeout(() => {
-        navigate(`/confirmation/${response.data._id}`);
-      }, 1500);
-      
-    } catch (error) {
-      console.error('Payment failed:', error);
-      alert('Payment failed. Please try again.');
-      setIsProcessing(false);
-    }
+      navigate(`/confirmation/${newMockId}`);
+    }, 1500);
   };
 
   return (
